@@ -9,6 +9,7 @@
   - [Install](#install)
   - [How to Train](#how-to-train)
   - [Chat!](#chat)
+  - [Colab tutorials](#colab-tutorials)
 
 <!-- /code_chunk_output -->
 
@@ -29,14 +30,14 @@
 
 ```python
 # KoBART 설치 
-pip3 install git+https://github.com/SKT-AI/KoBART
+pip3 install git+https://github.com/SKT-AI/KoBART#egg=kobart
 pip3 install pytorch_lightning
 git clone --recurse-submodules https://github.com/haven-jeon/KoBART-chatbot.git
 ```
 
 ## How to Train
 
-1. `KoBART` 다운로드
+1. `KoBART` 모델 다운로드
 
 ```python
 >>> from kobart import get_pytorch_kobart_model, get_kobart_tokenizer
@@ -73,3 +74,6 @@ user > 집은 너무 비싼거 같아요.
 Simsimi >  돈을 얼른 모아야할 이유가 생겼네요.
 ```
 
+## Colab tutorials
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/haven-jeon/KoBART-chatbot/blob/master/KoBART_chitchat.ipynb)

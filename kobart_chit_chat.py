@@ -291,13 +291,13 @@ if __name__ == '__main__':
                         max_seq_len=args.max_seq_len,
                         num_workers=args.num_workers)
     checkpoint_callback = pl.callbacks.ModelCheckpoint(monitor='val_loss',
-                                                    dirpath=args.default_root_dir,
-                                                    filename='model_chp/{epoch:02d}-{val_loss:.3f}',
-                                                    verbose=True,
-                                                    save_last=True,
-                                                    mode='min',
-                                                    save_top_k=-1,
-                                                    prefix='kobart_chitchat')
+                                                       dirpath=args.default_root_dir,
+                                                       filename='model_chp/{epoch:02d}-{val_loss:.3f}',
+                                                       verbose=True,
+                                                       save_last=True,
+                                                       mode='min',
+                                                       save_top_k=-1,
+                                                       prefix='kobart_chitchat')
     tb_logger = pl_loggers.TensorBoardLogger(os.path.join(args.default_root_dir, 'tb_logs'))
     lr_logger = pl.callbacks.LearningRateMonitor()
     trainer = pl.Trainer.from_argparse_args(args, logger=tb_logger,

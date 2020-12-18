@@ -30,8 +30,8 @@
 
 ```python
 # KoBART 설치 
-pip3 install git+https://github.com/SKT-AI/KoBART#egg=kobart
-pip3 install pytorch_lightning
+pip install git+https://github.com/SKT-AI/KoBART#egg=kobart
+pip install pytorch_lightning
 git clone --recurse-submodules https://github.com/haven-jeon/KoBART-chatbot.git
 ```
 
@@ -48,7 +48,7 @@ git clone --recurse-submodules https://github.com/haven-jeon/KoBART-chatbot.git
 2. chit-chat fine-tuning
 
 ```sh
-$ python kobart_chit_chat.py  --gradient_clip_val 1.0 --max_epochs 3 --default_root_dir logs --model_path kobart_emji_from_pretrained  --tokenizer_path emji_tokenizer --chat --gpus 1
+$ python kobart_chit_chat.py  --gradient_clip_val 1.0 --max_epochs 3 --default_root_dir logs --model_path kobart_from_pretrained  --tokenizer_path emji_tokenizer --chat --gpus 1
 ```
 
 ## Chat!

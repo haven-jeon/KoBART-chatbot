@@ -15,10 +15,6 @@ from transformers.optimization import AdamW, get_cosine_schedule_with_warmup
 
 parser = argparse.ArgumentParser(description='KoBART Chit-Chat')
 
-parser.add_argument('--subtask',
-                    type=str,
-                    default='NSMC',
-                    help='NSMC, CoLA, QPair')
 
 parser.add_argument('--checkpoint_path',
                     type=str,
@@ -109,9 +105,9 @@ class ChatDataset(Dataset):
                 # for cross entropy loss masking
                 labels += [-100]
         return {'input_ids': np.array(encoder_input_id, dtype=np.int_),
-                'attention_mask': np.array(encoder_attention_mask, dtype=np.float),
+                'attention_mask': np.array(encoder_attention_mask, dtype=np.float_),
                 'decoder_input_ids': np.array(decoder_input_id, dtype=np.int_),
-                'decoder_attention_mask': np.array(decoder_attention_mask, dtype=np.float),
+                'decoder_attention_mask': np.array(decoder_attention_mask, dtype=np.float_),
                 'labels': np.array(labels, dtype=np.int_)}
 
 
@@ -250,19 +246,14 @@ class KoBARTConditionalGeneration(Base):
     def training_step(self, batch, batch_idx):
         outs = self(batch)
         loss = outs.loss
-        self.log('train_loss', loss, prog_bar=True)
+        self.log('train_loss', loss, prog_bar=True, on_step=True, on_epoch=True)
         return loss
 
     def validation_step(self, batch, batch_idx):
         outs = self(batch)
         loss = outs['loss']
-        return (loss)
+        self.log('val_loss', loss, on_step=True, on_epoch=True, prog_bar=True)
 
-    def validation_epoch_end(self, outputs):
-        losses = []
-        for loss in outputs:
-            losses.append(loss)
-        self.log('val_loss', torch.stack(losses).mean(), prog_bar=True)
 
     def chat(self, text):
         input_ids =  [self.tokenizer.bos_token_id] + self.tokenizer.encode(text) + [self.tokenizer.eos_token_id]

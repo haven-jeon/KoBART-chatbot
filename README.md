@@ -32,7 +32,7 @@
 # KoBART 설치 
 pip install git+https://github.com/SKT-AI/KoBART#egg=kobart
 pip install pandas
-pip install pytorch_lightning>=1.2.1
+pip install pytorch_lightning==1.2.1
 git clone --recurse-submodules https://github.com/haven-jeon/KoBART-chatbot.git
 ```
 
